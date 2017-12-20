@@ -1,10 +1,10 @@
-# Tietokantasovelluksen esittelysivu
+# LahjaSovellus
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseen](http://mihamaki.users.cs.helsinki.fi/tsoha/)
+* [Linkki dokumentaatioon](/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Työn aiheena on lahjojen oston suunnitteluun tarkoitettu sovellus, jossa käyttäjä voi listata lahjaideoita tuntemilleen henkilöille. Päästäkseen käyttämään sovellusta käyttäjän on ensin kirjauduttava palveluun. Kirjautunut käyttäjä pystyy tarkastelemaan omia lahjaideoitaan, sekä muokkaamaan ja poistamaan henkilöitä ja ideoituja lahjoja sovelluksesta. 
