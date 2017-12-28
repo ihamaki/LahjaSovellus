@@ -26,7 +26,8 @@ CREATE TABLE Gift(
 
 CREATE TABLE Tag(
   id SERIAL PRIMARY KEY,
-  name varchar(50)
+  name varchar(50),
+  giftuser_id INTEGER REFERENCES GiftUser(id)
 );
 
 CREATE TABLE GiftTag(
