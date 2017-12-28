@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block content %}
+  <h1>Suunnitellut lahjat</h1>
+
+  <p>
+    <a href="#" class="btn btn-success">Lisää lahja</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Lahja</th>
+        <th>Saaja</th>
+        <th>Tagit</th>
+        <th>Lisäyspäivä</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><a href="#">Nintendo Switch</a></td>
+        <td>Ukko Nooa</td>
+        <td>Syntymäpäivälahja, Elektroniikka</td>
+        <td>27.12.2017</td>
+        <td><label class="label label-danger">ei annettu</label></td>
+        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+      </tr>
+      <tr>
+        <td><a href="#">Kenkälusikka</a></td>
+        <td>Ukko Nooa</td>
+        <td>Yleinen</td>
+        <td>11.11.2017</td>
+        <td><label class="label label-success">annettu</label></td>
+        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+      </tr>
+      <tr>
+        <td><a href="#">Hunaja</a></td>
+        <td>Maija Mehiläinen</td>
+        <td>Joululahja, Ruoka</td>
+        <td>10.12.2017</td>
+        <td><label class="label label-success">annettu</label></td>
+        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
