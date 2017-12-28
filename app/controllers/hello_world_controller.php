@@ -13,7 +13,6 @@
     }
 
     public static function frontpage(){
-      // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
    	  View::make('suunnitelmat/frontpage.html');
     }
 
@@ -43,6 +42,10 @@
 
     public static function person_edit(){
       View::make('suunnitelmat/person_edit.html');
+    }
+
+    public static function tag_edit(){
+      View::make('suunnitelmat/tag_edit.html');
     }
   
     public static function login(){

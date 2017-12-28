@@ -40,6 +40,10 @@
     HelloWorldController::person_edit();
   });
 
+  $routes->get('/tags/1/edit', function() {
+    HelloWorldController::tag_edit();
+  });
+
   $routes->get('/login', function() {
     HelloWorldController::login();
   });

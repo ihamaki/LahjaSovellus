@@ -21,3 +21,4 @@ Työn aiheena on lahjojen oston suunnitteluun tarkoitettu sovellus, jossa käytt
 * [Henkilön esittelysivu](http://mihamaki.users.cs.helsinki.fi/tsoha/people/1)
 * [Henkilön muokkaus](http://mihamaki.users.cs.helsinki.fi/tsoha/people/1/edit)
 * [Henkilön lahjojen listaus](http://mihamaki.users.cs.helsinki.fi/tsoha/gifts/person/1)
+* [Tagin muokkaus](http://mihamaki.users.cs.helsinki.fi/tsoha/tags/1/edit)
