@@ -16,8 +16,8 @@
     GiftController::list();
   });
 
-  $routes->get('/gifts/1', function() {
-    HelloWorldController::gift_show();
+  $routes->get('/gifts/:id', function($id) {
+    GiftController::show($id);
   });
 
   $routes->get('/gifts/1/edit', function() {

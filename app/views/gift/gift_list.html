@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+  <h1>Suunnitellut lahjat</h1>
+
+  <p>
+    <a href="#" class="btn btn-success">Lisää lahja</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+
+    <thead>
+      <tr>
+        <th>Lahja</th>
+        <th>Saaja</th>
+        <th>Tagit</th>
+        <th>Lisäyspäivä</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+        {% for gift in gifts %}
+            <tr>
+                <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
+                <td>{{gift.person_id}}</td>
+                <td></td>
+                <td>{{gift.added}}</td>
+                <td>
+                    {% if gift.status %}
+                        <label class="label label-success">annettu
+                    {% else %}
+                        <label class="label label-danger">ei annettu
+                    {% endif %}
+                </td>
+                <td><a class="btn btn-default btn-sm" href="{{base_path}}/gifts/{{gift.id}}/edit">Muokkaa</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+  </table>
+{% endblock %}

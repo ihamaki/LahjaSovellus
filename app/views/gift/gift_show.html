@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{gift.name}}</h1>
+
+  <ul>
+    <li><strong>Saaja:</strong> <a href="{{base_path}}/people/{{gift.person_id}}">{{gift.person_id}}</a></li>
+    <li><strong>Tagit:</strong> </li>
+    <li><strong>Status:</strong> 
+        {% if gift.status %}
+            <label class="label label-success">annettu
+        {% else %}
+            <label class="label label-danger">ei annettu
+        {% endif %}
+    </li>
+    <li><strong>Lisäyspäivä:</strong> {{gift.added}}</li>
+  </ul>
+
+  <p>{{gift.description}}</p>
+
+  <p>
+    <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+  </p>
+{% endblock %}
