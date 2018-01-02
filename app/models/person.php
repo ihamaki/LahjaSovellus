@@ -49,9 +49,26 @@ class Person extends BaseModel {
     }
 
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Person (name, birthday, description) VALUES (:name, :birthday, :description) RETURNING id');
-        $query->execute(array('name' => $this->name, 'birthday' => $this->birthday, 'description' => $this->description));
+        $query = DB::connection()->prepare('INSERT INTO Person (name, birthday, description) 
+                                            VALUES (:name, :birthday, :description) 
+                                            RETURNING id');
+        $query->execute(array(
+            'name' => $this->name, 
+            'birthday' => $this->birthday, 
+            'description' => $this->description));
         $row = $query->fetch();
         $this->id = $row['id'];
-      }
+    }
+
+    public function update($id){
+        $query = DB::connection()->prepare('UPDATE Person 
+                                            SET name = :name, birthday = :birthday, description = :description 
+                                            WHERE id = :id');
+        $query->execute(array(
+            'id' => $id,
+            'name' => $this->name, 
+            'birthday' => $this->birthday, 
+            'description' => $this->description));   
+    }
+
 }

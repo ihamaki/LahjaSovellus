@@ -28,4 +28,22 @@ class PersonController extends BaseController{
     Redirect::to('/people/' . $person->id, array('message' => 'Henkilön lisäys onnistui!'));
   }
 
+  public static function edit($id){
+    $person = Person::find($id);
+    View::make('person/person_edit.html', array('person' => $person));
+  }
+
+  public static function update($id){
+    $params = $_POST;
+    $person = new Person(array(
+      'id' => $id,
+      'name' => $params['name'],
+      'birthday' => $params['birthday'],
+      'description' => $params['description']
+    ));
+    $person->update($id);
+
+    Redirect::to('/people/' . $person->id, array('message' => 'Henkilön muokkaus onnistui!'));
+  }
+
 }

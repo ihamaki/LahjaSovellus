@@ -44,8 +44,12 @@
     PersonController::show($id);
   });
 
-  $routes->get('/people/1/edit', function() {
-    HelloWorldController::person_edit();
+  $routes->post('/people/:id', function($id) {
+    PersonController::update($id);
+  });
+
+  $routes->get('/people/:id/edit', function($id) {
+    PersonController::edit($id);
   });
 
   $routes->get('/tags/1/edit', function() {

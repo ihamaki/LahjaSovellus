@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+  <h1>Muokkaa henkilöä {{person.name}}</h1>
+
+  <form method="post" action="{{base_path}}/people/{{person.id}}">
+    <div class="form-group">
+      <label>Nimi</label>
+      <input name="name" class="form-control" value={{person.name}} type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Syntymäpäivä</label>
+        <input name="birthday" class="form-control" value={{person.birthday}} type="date">
+    </div>
+
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea name="description" class="form-control" value={{person.description}}>{{person.description}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+        <a href="{{base_path}}/people/{{person.id}}" type="button" class="btn btn-danger">Peruuta</a>
+    </div>
+  </form>
+{% endblock %}
