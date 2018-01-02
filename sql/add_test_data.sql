@@ -6,9 +6,9 @@ INSERT INTO Person (name, birthday, description, account_id)
 INSERT INTO Person (name, birthday, description, account_id) 
     VALUES ('Aku', '1985-07-07', 'Toivoi lahjaksi sukkia. Tykkää punaisesta.', 1);
 
-INSERT INTO Gift (name, dateAdded, description, account_id, person_id)
+INSERT INTO Gift (name, added, description, account_id, person_id)
     VALUES ('Maljakko', NOW(), 'Iittalan uusi maljakko on valmistettu lasista.', 1, 1);
-INSERT INTO Gift (name, dateAdded, description, account_id, person_id)
+INSERT INTO Gift (name, added, description, account_id, person_id)
     VALUES ('Sukat', NOW(), 'Hauskat raidalliset sukat.', 1, 2);
 
 INSERT INTO Tag (name, account_id) VALUES ('Syntymäpäivälahja', 1);

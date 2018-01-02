@@ -8,8 +8,11 @@
     }
 
     public static function sandbox(){
-      // Testaa koodiasi täällä
-      View::make('helloworld.html');
+      $mallikas = Account::find(1);
+      $accounts = Account::all(); 
+
+      Kint::dump($mallikas);
+      Kint::dump($accounts);
     }
 
     public static function frontpage(){
