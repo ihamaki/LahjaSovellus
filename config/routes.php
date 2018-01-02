@@ -13,7 +13,7 @@
   });
 
   $routes->get('/gifts', function() {
-    HelloWorldController::gift_list();
+    GiftController::list();
   });
 
   $routes->get('/gifts/1', function() {
@@ -29,11 +29,19 @@
   });
 
   $routes->get('/people', function() {
-    HelloWorldController::person_list();
+    PersonController::list();
   });
 
-  $routes->get('/people/1', function() {
-    HelloWorldController::person_show();
+  $routes->post('/people', function() {
+    PersonController::create();
+  });
+
+  $routes->get('/people/new', function() {
+    PersonController::new();
+  });
+
+  $routes->get('/people/:id', function($id) {
+    PersonController::show($id);
   });
 
   $routes->get('/people/1/edit', function() {

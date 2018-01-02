@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{person.name}}</h1>
+
+  <ul>
+    <li><strong>Syntymäpäivä:</strong> {{person.birthday}}</li>
+  </ul>
+
+  <p>{{person.description}}</p>
+
+  <p>
+    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/people/{{person.id}}/edit" class="btn btn-default">Muokkaa</a>
+  </p>
+{% endblock %}

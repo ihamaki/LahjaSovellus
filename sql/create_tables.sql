@@ -1,5 +1,3 @@
--- Lisää CREATE TABLE lauseet tähän tiedostoon
-
 CREATE TABLE Account(
   id SERIAL PRIMARY KEY,
   username varchar(30) NOT NULL,
@@ -20,8 +18,8 @@ CREATE TABLE Gift(
   person_id INTEGER REFERENCES Person(id),
   name varchar(100) NOT NULL,
   status boolean DEFAULT FALSE,
-  added DATE, 
-  description varchar(500)
+  description varchar(500),
+  added DATE
 );
 
 CREATE TABLE Tag(
