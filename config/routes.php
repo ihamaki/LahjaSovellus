@@ -16,6 +16,14 @@
     GiftController::list();
   });
 
+  $routes->get('/gifts/new', function() {
+    GiftController::new();
+  });
+
+  $routes->get('/testgifts', function() {
+    HelloWorldController::gift_list();
+  });
+
   $routes->get('/gifts/:id', function($id) {
     GiftController::show($id);
   });

@@ -11,7 +11,6 @@
       <tr>
         <th>Lahja</th>
         <th>Saaja</th>
-        <th>Tagit</th>
         <th>Lisäyspäivä</th>
         <th>Status</th>
         <th></th>
@@ -22,8 +21,7 @@
         {% for gift in gifts %}
             <tr>
                 <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
-                <td>{{gift.person_id}}</td>
-                <td></td>
+                <td>{{gift.person_name}}</td>
                 <td>{{gift.added}}</td>
                 <td>
                     {% if gift.status %}

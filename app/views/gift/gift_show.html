@@ -1,9 +1,8 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
   <h1>{{gift.name}}</h1>
 
   <ul>
-    <li><strong>Saaja:</strong> <a href="{{base_path}}/people/{{gift.person_id}}">{{gift.person_id}}</a></li>
+    <li><strong>Saaja:</strong> <a href="{{base_path}}/people/{{gift.person_id}}">{{gift.person_name}}</a></li>
     <li><strong>Tagit:</strong> </li>
     <li><strong>Status:</strong> 
         {% if gift.status %}

@@ -8,11 +8,7 @@
     }
 
     public static function sandbox(){
-      $mallikas = Account::find(1);
-      $accounts = Account::all(); 
-
-      Kint::dump($mallikas);
-      Kint::dump($accounts);
+      echo Person::find(1)->name;
     }
 
     public static function frontpage(){

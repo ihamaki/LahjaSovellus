@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+  <h1>Lisää uusi lahja</h1>
+
+  <form>
+    <div class="form-group">
+      <label>Nimi</label>
+      <input name="name" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label>Saaja</label>
+        <select name="person" class="form-control">
+            {% for person in people %}
+            <option>{{person.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Tagit</label>
+        <input name="tags" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea name="description" class="form-control"></textarea>
+    </div>
+    <div class="checkbox">
+        <label>
+          <input type="checkbox">
+          Annettu
+        </label>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}
