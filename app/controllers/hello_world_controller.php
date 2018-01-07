@@ -8,7 +8,12 @@
     }
 
     public static function sandbox(){
-      echo Person::find(1)->name;
+      $mike = new Person(array(
+        'name' => ''
+      ));
+      $errors = $mike->errors();
+    
+      Kint::dump($errors);
     }
 
     public static function frontpage(){

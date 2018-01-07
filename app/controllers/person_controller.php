@@ -18,14 +18,22 @@ class PersonController extends BaseController{
 
   public static function create(){
     $params = $_POST;
-    $person = new Person(array(
+    $attributes = array(
       'name' => $params['name'],
       'birthday' => $params['birthday'],
       'description' => $params['description']
-    ));
-    $person->save();
+    );
 
-    Redirect::to('/people/' . $person->id, array('message' => 'Henkilön lisäys onnistui!'));
+    $person = new Person($attributes);
+    $errors = $person->errors();
+
+    if(count($errors) == 0){
+      $person->save();
+      Redirect::to('/people/' . $person->id, array('message' => 'Henkilön lisäys onnistui!'));
+    }else{
+      View::make('person/person_new.html', array('errors' => $errors, 'attributes' => $attributes));
+    }
+
   }
 
   public static function edit($id){
@@ -41,9 +49,16 @@ class PersonController extends BaseController{
       'birthday' => $params['birthday'],
       'description' => $params['description']
     ));
-    $person->update($id);
 
-    Redirect::to('/people/' . $person->id, array('message' => 'Henkilön muokkaus onnistui!'));
+    $errors = $person->errors();
+
+    if(count($errors) == 0){
+      $person->update($id);
+      Redirect::to('/people/' . $person->id, array('message' => 'Henkilön muokkaus onnistui!'));
+    }else{
+      View::make('person/person_edit.html', array('errors' => $errors, 'person' => $person));
+    }
+
   }
 
 }

@@ -1,20 +1,30 @@
 {% extends "base.html" %} {% block content %}
   <h1>Muokkaa henkilöä {{person.name}}</h1>
 
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
   <form method="post" action="{{base_path}}/people/{{person.id}}">
     <div class="form-group">
       <label>Nimi</label>
-      <input name="name" class="form-control" value={{person.name}} type="text">
+      <input name="name" class="form-control" value="{{person.name}}" type="text">
     </div>
 
     <div class="form-group">
         <label>Syntymäpäivä</label>
-        <input name="birthday" class="form-control" value={{person.birthday}} type="date">
+        <input name="birthday" class="form-control" value="{{person.birthday}}" type="date">
     </div>
 
     <div class="form-group">
       <label>Kuvaus</label>
-      <textarea name="description" class="form-control" value={{person.description}}>{{person.description}}</textarea>
+      <textarea name="description" class="form-control">{{person.description}}</textarea>
     </div>
 
     <div class="form-group">
