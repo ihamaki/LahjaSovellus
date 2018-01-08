@@ -72,6 +72,19 @@ class Person extends BaseModel{
             'description' => $this->description));   
     }
 
+    public function delete(){
+        $query = DB::connection()->prepare('DELETE FROM Person WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
+    public function can_delete(){
+        $person_gifts = Gift::findByPerson($this->id);
+        if(count($person_gifts)>0){
+            return false;
+        }
+        return true;
+    }
+
     public function validate_name(){
         $errors = array();
         if($this->name == '' || $this->name == null){

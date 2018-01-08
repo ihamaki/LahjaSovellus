@@ -40,24 +40,28 @@
     PersonController::list();
   });
 
-  $routes->post('/people', function() {
-    PersonController::create();
-  });
-
   $routes->get('/people/new', function() {
     PersonController::new();
+  });
+
+  $routes->post('/people/new', function() {
+    PersonController::create();
   });
 
   $routes->get('/people/:id', function($id) {
     PersonController::show($id);
   });
 
-  $routes->post('/people/:id', function($id) {
+  $routes->get('/people/:id/edit', function($id) {
+    PersonController::edit($id);
+  });
+
+  $routes->post('/people/:id/edit', function($id) {
     PersonController::update($id);
   });
 
-  $routes->get('/people/:id/edit', function($id) {
-    PersonController::edit($id);
+  $routes->post('/people/:id/destroy', function($id) {
+    PersonController::destroy($id);
   });
 
   $routes->get('/tags/1/edit', function() {

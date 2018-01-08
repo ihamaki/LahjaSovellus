@@ -1,6 +1,10 @@
 {% extends "base.html" %} {% block content %}
   <h1>Lahjojen saajat</h1>
 
+  {% if message %}
+    <div class="alert alert-success">{{message}}</div>
+  {% endif %}
+
   <p>
     <a href="{{base_path}}/people/new" class="btn btn-success">Lisää henkilö</a>
   </p>

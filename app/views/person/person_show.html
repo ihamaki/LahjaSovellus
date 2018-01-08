@@ -1,8 +1,12 @@
-{% extends "base.html" %}
-{% block content %}
+{% import "macros/forms.html" as forms %}
+{% extends "base.html" %} {% block content %}
 
   {% if message %}
     <div class="alert alert-success">{{message}}</div>
+  {% endif %}
+
+  {% if error %}
+    <div class="alert alert-danger">{{error}}</div>
   {% endif %}
 
   <h1>{{person.name}}</h1>
@@ -14,6 +18,7 @@
   <p>{{person.description}}</p>
 
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/people/{{person.id}}/edit" class="btn btn-default">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/people/#{person.id}/destroy")}}
+    <a href="{{base_path}}/people/{{person.id}}/edit" class="btn btn-default">Muokkaa</a>
   </p>
 {% endblock %}

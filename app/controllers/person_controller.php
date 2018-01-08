@@ -33,7 +33,6 @@ class PersonController extends BaseController{
     }else{
       View::make('person/person_new.html', array('errors' => $errors, 'attributes' => $attributes));
     }
-
   }
 
   public static function edit($id){
@@ -58,7 +57,16 @@ class PersonController extends BaseController{
     }else{
       View::make('person/person_edit.html', array('errors' => $errors, 'person' => $person));
     }
+  }
 
+  public static function destroy($id){
+    $person = Person::find($id);
+    if($person->can_delete()){
+      $person->delete();
+      Redirect::to('/people', array('message' => 'Henkilön poisto onnistui!'));
+    }else{
+      Redirect::to('/people/' . $person->id, array('error' => 'Henkilöä ei voida poistaa, sillä henkilöön liittyy lahjoja', 'person' => $person));
+    }
   }
 
 }

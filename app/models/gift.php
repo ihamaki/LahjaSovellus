@@ -56,4 +56,28 @@ class Gift extends BaseModel{
         return null;
     }
 
+    public static function findByPerson($person_id){
+        $query = DB::connection()->prepare('SELECT * FROM Gift WHERE person_id = :person_id');
+        $query->execute(array('person_id' => $person_id));
+        $rows = $query->fetchAll();
+
+        $gifts = array();
+
+        foreach($rows as $row){
+            $person_name = Person::find($row['person_id'])->name;
+            $gifts[] = new Gift(array(
+                'id' => $row['id'],
+                'account_id' => $row['account_id'],
+                'person_id' => $row['person_id'],
+                'person_name' => $person_name,
+                'name' => $row['name'],
+                'status' => $row['status'],
+                'description' => $row['description'],
+                'added' => $row['added']
+            ));
+        }
+
+        return $gifts;
+    }
+
 }

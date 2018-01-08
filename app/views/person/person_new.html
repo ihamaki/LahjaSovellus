@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
   <h1>Lisää uusi henkilö</h1>
 
   {% if errors %}
@@ -12,7 +11,7 @@
     </div>
   {% endif %}
 
-  <form method="post" action="{{base_path}}/people">
+  <form method="post" action="{{base_path}}/people/new">
     <div class="form-group">
       <label>Nimi</label>
       <input name="name" class="form-control" value="{{attributes.name}}" type="text">
