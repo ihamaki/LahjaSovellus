@@ -9,9 +9,15 @@
 
 Työn aiheena on lahjojen oston suunnitteluun tarkoitettu sovellus, jossa käyttäjä voi listata lahjaideoita tuntemilleen henkilöille. Päästäkseen käyttämään sovellusta käyttäjän on ensin kirjauduttava palveluun. Kirjautunut käyttäjä pystyy tarkastelemaan omia lahjaideoitaan, sekä muokkaamaan ja poistamaan henkilöitä ja ideoituja lahjoja sovelluksesta. 
 
+## Testikäyttäjän tunnukset
+
+Käyttäjänimi: UkkoNooa
+
+Salasana: ukkonooa
+
 ## Linkit sovellukseen suunniteltuihin näkymiin
 
-* [Etusivu](http://mihamaki.users.cs.helsinki.fi/tsoha/frontpage)
+* [Etusivu](http://mihamaki.users.cs.helsinki.fi/tsoha/)
 * [Kirjautuminen](http://mihamaki.users.cs.helsinki.fi/tsoha/login)
 * [Rekisteröityminen](http://mihamaki.users.cs.helsinki.fi/tsoha/register)
 * [Lahjojen listaus](http://mihamaki.users.cs.helsinki.fi/tsoha/gifts)

@@ -1,5 +1,5 @@
+INSERT INTO Account (username, password) VALUES ('UkkoNooa', 'ukkonooa');
 INSERT INTO Account (username, password) VALUES ('MikkoMallikas', 'Mallikas');
-INSERT INTO Account (username, password) VALUES ('Urpo', 'Turpo');
 
 INSERT INTO Person (name, birthday, description, account_id) 
     VALUES ('Iines', '1990-02-10', 'Tykkää sisustamisesta.', 1);

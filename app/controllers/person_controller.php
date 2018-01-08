@@ -3,7 +3,8 @@
 class PersonController extends BaseController{
 
   public static function list(){
-    $people = Person::all();
+    $user = self::get_user_logged_in();
+    $people = Person::all($user->id);
     View::make('person/person_list.html', array('people' => $people));
   }
 
@@ -17,8 +18,10 @@ class PersonController extends BaseController{
   }
 
   public static function create(){
+    $user = self::get_user_logged_in();
     $params = $_POST;
     $attributes = array(
+      'account_id' => $user->id,
       'name' => $params['name'],
       'birthday' => $params['birthday'],
       'description' => $params['description']

@@ -9,12 +9,12 @@ class Person extends BaseModel{
         $this->validators = array('validate_name', 'validate_birthday', 'validate_description');
     }
 
-    public static function all(){
-        $query = DB::connection()->prepare('SELECT * FROM Person');
-        $query->execute();
+    public static function all($account_id){
+        $query = DB::connection()->prepare('SELECT * FROM Person WHERE account_id = :account_id');
+        $query->execute(array('account_id' => $account_id));
         $rows = $query->fetchAll();
     
-        $accounts = array();
+        $people = array();
         
         foreach($rows as $row){
             $people[] = new Person(array(
@@ -50,10 +50,11 @@ class Person extends BaseModel{
     }
 
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Person (name, birthday, description) 
-                                            VALUES (:name, :birthday, :description) 
+        $query = DB::connection()->prepare('INSERT INTO Person (account_id, name, birthday, description) 
+                                            VALUES (:account_id, :name, :birthday, :description) 
                                             RETURNING id');
         $query->execute(array(
+            'account_id' => $this->account_id,
             'name' => $this->name, 
             'birthday' => $this->birthday, 
             'description' => $this->description));
