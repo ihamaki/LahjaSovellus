@@ -1,5 +1,13 @@
 {% extends "base.html" %} {% block content %}
-  <h1>Suunnitellut lahjat</h1>
+  {% if user_logged_in %}
+    <h1>Käyttäjän {{user_logged_in.username}} suunnitellut lahjat</h1>
+  {% else %}
+    <h1>Suunnitellut lahjat</h1>
+  {% endif %}
+
+  {% if message %}
+    <div class="alert alert-success">{{message}}</div>
+  {% endif %}
 
   <p>
     <a href="{{base_path}}/gifts/new" class="btn btn-success">Lisää lahja</a>
@@ -18,21 +26,21 @@
     </thead>
 
     <tbody>
-        {% for gift in gifts %}
-            <tr>
-                <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
-                <td>{{gift.person_name}}</td>
-                <td>{{gift.added}}</td>
-                <td>
-                    {% if gift.status %}
-                        <label class="label label-success">annettu
-                    {% else %}
-                        <label class="label label-danger">ei annettu
-                    {% endif %}
-                </td>
-                <td><a class="btn btn-default btn-sm" href="{{base_path}}/gifts/{{gift.id}}/edit">Muokkaa</a></td>
-            </tr>
-        {% endfor %}
+      {% for gift in gifts %}
+        <tr>
+          <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
+          <td>{{gift.person_name}}</td>
+          <td>{{gift.added}}</td>
+          <td>
+          {% if gift.status %}
+            <label class="label label-success">annettu
+          {% else %}
+            <label class="label label-danger">ei annettu
+          {% endif %}
+          </td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/gifts/{{gift.id}}/edit">Muokkaa</a></td>
+        </tr>
+      {% endfor %}
     </tbody>
 
   </table>
