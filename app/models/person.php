@@ -89,10 +89,10 @@ class Person extends BaseModel{
 
     public function validate_name(){
         $errors = array();
-        if($this->name == '' || $this->name == null){
+        if(!$this->validate_not_empty($this->name)){
             $errors[] = 'Henkilön nimi ei saa olla tyhjä';
         }
-        if(strlen($this->name) > 50){
+        if(!$this->validate_max_length($this->name, 50)){
             $errors[] = 'Henkilön nimi ei saa olla yli 50 merkkiä';
         }
         return $errors;
@@ -100,7 +100,7 @@ class Person extends BaseModel{
 
     public function validate_birthday(){
         $errors = array();
-        if($this->birthday == ''){
+        if(!$this->validate_not_empty($this->birthday)){
             $errors[] = 'Henkilön syntymäpäivä ei saa olla tyhjä';
         }
         return $errors;
@@ -108,7 +108,7 @@ class Person extends BaseModel{
 
     public function validate_description(){
         $errors = array();
-        if(strlen($this->description) > 500){
+        if(!$this->validate_max_length($this->description, 500)){
             $errors[] = 'Kuvaus ei saa olla yli 500 merkkiä';
         }
         return $errors;

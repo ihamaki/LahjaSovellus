@@ -27,4 +27,25 @@
       return $errors;
     }
 
+    public function validate_not_empty($string){
+      if($string == '' || $string == null){
+        return false;
+      }
+      return true;
+    }
+
+    public function validate_min_length($string, $min){
+      if (strlen($string) < $min){
+        return false;
+      }
+      return true;
+    }
+
+    public function validate_max_length($string, $max){
+      if (strlen($string) > $max){
+        return false;
+      }
+      return true;
+    }
+
   }

@@ -43,8 +43,15 @@ class GiftController extends BaseController{
     }
 
     $gift = new Gift($attributes);
-    $gift->save();
-    Redirect::to('/gifts/' . $gift->id, array('message' => 'Lahjan lisäys onnistui!'));
+    $errors = $gift->errors();
+
+    if(count($errors) == 0){
+      $gift->save();
+      Redirect::to('/gifts/' . $gift->id, array('message' => 'Lahjan lisäys onnistui!'));
+    }else{
+      $people = Person::all($user->id);
+      View::make('gift/gift_new.html', array('errors' => $errors, 'attributes' => $attributes, 'people' => $people));
+    }
   }
 
   public static function destroy($id){

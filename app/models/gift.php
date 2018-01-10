@@ -6,6 +6,7 @@ class Gift extends BaseModel{
 
     public function __construct($attributes){
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_description');
     }
 
     public static function all($account_id){
@@ -110,4 +111,22 @@ class Gift extends BaseModel{
         $query->execute(array('id' => $this->id));
     }
 
+    public function validate_name(){
+        $errors = array();
+        if(!$this->validate_not_empty($this->name)){
+            $errors[] = 'Lahjan nimi ei saa olla tyhjä';
+        }
+        if(!$this->validate_max_length($this->name, 100)){
+            $errors[] = 'Lahjan nimen pituus ei saa olla yli 100 merkkiä';
+        }
+        return $errors;
+    }
+
+    public function validate_description(){
+        $errors = array();
+        if(!$this->validate_max_length($this->description, 500)){
+            $errors[] = 'Kuvaus ei saa olla yli 500 merkkiä';
+        }
+        return $errors;
+    }
 }
