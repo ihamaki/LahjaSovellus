@@ -16,4 +16,10 @@ class UserController extends BaseController{
       Redirect::to('/gifts', array('message' => 'Tervetuloa takaisin ' . $user->username . '!'));
     }
   }
+
+  public static function logout(){
+    $_SESSION['user'] = null;
+    Redirect::to('/', array('message' => 'Uloskirjautuminen onnistui!'));
+  }
+  
 }

@@ -1,6 +1,9 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+  {% if message %}
+    <div class="alert alert-success">{{message}}</div>
+  {% endif %}
+
   <div class="page-header">
     <h1>Tervetuloa LahjaSovellukseen! Rekisteröidy ja kirjaudu sisään käyttääksesi sovellusta.</h1>
   </div>
