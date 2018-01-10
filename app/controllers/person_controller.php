@@ -10,7 +10,8 @@ class PersonController extends BaseController{
 
   public static function show($id){
     $person = Person::find($id);
-    View::make('person/person_show.html', array('person' => $person));
+    $gifts = Gift::findByPerson($id);
+    View::make('person/person_show.html', array('person' => $person, 'gifts' => $gifts));
   }
 
   public static function new(){

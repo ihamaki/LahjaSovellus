@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
   {% if user_logged_in %}
-    <h1>Käyttäjän {{user_logged_in.username}} suunnitellut lahjat</h1>
+    <h1>Käyttäjän {{user_logged_in.username}} lahjat</h1>
   {% else %}
     <h1>Suunnitellut lahjat</h1>
   {% endif %}
@@ -13,35 +13,37 @@
     <a href="{{base_path}}/gifts/new" class="btn btn-success">Lisää lahja</a>
   </p>
 
-  <table class="table table-striped table-bordered">
-
-    <thead>
-      <tr>
-        <th>Lahja</th>
-        <th>Saaja</th>
-        <th>Lisäyspäivä</th>
-        <th>Status</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {% for gift in gifts %}
+  {% if gifts %}
+    <table class="table table-striped table-bordered">
+      <thead>
         <tr>
-          <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
-          <td>{{gift.person_name}}</td>
-          <td>{{gift.added}}</td>
-          <td>
-          {% if gift.status %}
-            <label class="label label-success">annettu
-          {% else %}
-            <label class="label label-danger">ei annettu
-          {% endif %}
-          </td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/gifts/{{gift.id}}/edit">Muokkaa</a></td>
+          <th>Lahja</th>
+          <th>Saaja</th>
+          <th>Lisäyspäivä</th>
+          <th>Status</th>
+          <th></th>
         </tr>
-      {% endfor %}
-    </tbody>
+      </thead>
 
-  </table>
+      <tbody>
+        {% for gift in gifts %}
+          <tr>
+            <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
+            <td>{{gift.person_name}}</td>
+            <td>{{gift.added}}</td>
+            <td>
+            {% if gift.status %}
+              <label class="label label-success">annettu
+            {% else %}
+              <label class="label label-danger">ei annettu
+            {% endif %}
+            </td>
+            <td><a class="btn btn-default btn-sm" href="{{base_path}}/gifts/{{gift.id}}/edit">Muokkaa</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Käyttäjä ei ole vielä lisännyt yhtään lahjaa.</p>
+  {% endif %}
 {% endblock %}

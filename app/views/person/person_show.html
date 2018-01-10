@@ -11,14 +11,45 @@
 
   <h1>{{person.name}}</h1>
 
-  <ul>
-    <li><strong>Syntymäpäivä:</strong> {{person.birthday}}</li>
-  </ul>
-
+  <p><strong>Syntymäpäivä:</strong> {{person.birthday}}</p>
   <p>{{person.description}}</p>
-
   <p>
     {{forms.destroy_button("#{base_path}/people/#{person.id}/destroy")}}
     <a href="{{base_path}}/people/{{person.id}}/edit" class="btn btn-default">Muokkaa</a>
   </p>
+
+  </br>
+  <h3>Lahjat</h3>
+  
+  {% if gifts %}
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Lahja</th>
+          <th>Lisäyspäivä</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for gift in gifts %}
+          <tr>
+            <td><a href="{{base_path}}/gifts/{{gift.id}}">{{gift.name}}</td>
+            <td>{{gift.added}}</td>
+            <td>
+            {% if gift.status %}
+              <label class="label label-success">annettu
+            {% else %}
+              <label class="label label-danger">ei annettu
+            {% endif %}
+            </td>
+            <td><a class="btn btn-default btn-sm" href="{{base_path}}/gifts/{{gift.id}}/edit">Muokkaa</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Henkilölle {{person.name}} ei ole vielä lisätty yhtään lahjaa.</p>
+  {% endif %}
 {% endblock %}

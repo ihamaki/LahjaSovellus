@@ -37,11 +37,13 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navigation">
-          <ul class="nav navbar-nav">
-            <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}/gifts">Lahjat</a></li>
-            <li><a href="{{base_path}}/people">Saajat</a></li>
-          </ul>
+          {% if user_logged_in %}
+            <ul class="nav navbar-nav">
+              <!-- Navigaation linkit -->
+              <li><a href="{{base_path}}/gifts">Lahjat</a></li>
+              <li><a href="{{base_path}}/people">Saajat</a></li>
+            </ul>
+          {% endif %}
 
           {% if user_logged_in %}
             <form class="navbar-form navbar-right" method="post" action="{{base_path}}/logout">
