@@ -4,6 +4,14 @@
     BaseController::check_logged_in();
   }
 
+  $routes->get('/', function() {
+    DefaultController::home();
+  });
+
+  $routes->get('/hiekkalaatikko', function() {
+    HelloWorldController::sandbox();
+  });
+
   $routes->get('/login', function() {
     UserController::login();
   });
@@ -20,28 +28,28 @@
     HelloWorldController::register();
   });
 
-  $routes->get('/', function() {
-    DefaultController::home();
-  });
-
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-  });
-
-  $routes->get('/gifts', function() {
+  $routes->get('/gifts', 'check_logged_in', function() {
     GiftController::list();
   });
 
-  $routes->get('/gifts/new', function() {
+  $routes->get('/gifts/new', 'check_logged_in', function() {
     GiftController::new();
+  });
+
+  $routes->post('/gifts/new', 'check_logged_in', function() {
+    GiftController::create();
   });
 
   $routes->get('/testgifts', function() {
     HelloWorldController::gift_list();
   });
 
-  $routes->get('/gifts/:id', function($id) {
+  $routes->get('/gifts/:id', 'check_logged_in', function($id) {
     GiftController::show($id);
+  });
+
+  $routes->post('/gifts/:id/destroy', 'check_logged_in', function($id) {
+    GiftController::destroy($id);
   });
 
   $routes->get('/gifts/1/edit', function() {

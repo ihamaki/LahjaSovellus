@@ -10,7 +10,8 @@ class Person extends BaseModel{
     }
 
     public static function all($account_id){
-        $query = DB::connection()->prepare('SELECT * FROM Person WHERE account_id = :account_id');
+        $query = DB::connection()->prepare('SELECT * FROM Person WHERE account_id = :account_id
+                                            ORDER BY name ASC');
         $query->execute(array('account_id' => $account_id));
         $rows = $query->fetchAll();
     

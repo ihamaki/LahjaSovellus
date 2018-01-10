@@ -8,9 +8,10 @@ class Gift extends BaseModel{
         parent::__construct($attributes);
     }
 
-    public static function all(){
-        $query = DB::connection()->prepare('SELECT * FROM Gift');
-        $query->execute();
+    public static function all($account_id){
+        $query = DB::connection()->prepare('SELECT * FROM Gift WHERE account_id = :account_id
+                                            ORDER BY added DESC');
+        $query->execute(array('account_id' => $account_id));
         $rows = $query->fetchAll();
     
         $gifts = array();
@@ -78,6 +79,35 @@ class Gift extends BaseModel{
         }
 
         return $gifts;
+    }
+
+    public function save(){
+        $query = DB::connection()->prepare('INSERT INTO Gift (account_id, person_id, name, status, description, added)
+                                            VALUES (:account_id, :person_id, :name, :status, :description, :added)
+                                            RETURNING id');
+        $query->execute(array(
+            'account_id' => $this->account_id,
+            'person_id' => $this->person_id,
+            'name' => $this->name,
+            'status' => $this->status,
+            'description' => $this->description,
+            'added' => $this->added
+        ));
+
+        // $query->bindValue(':account_id', $this->account_id, PDO::PARAM_INT);
+        // $query->bindValue(':person_id', $this->person_id, PDO::PARAM_INT);
+        // $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+        // $query->bindValue(':status', $this->status, PDO::PARAM_BOOL);
+        // $query->bindValue(':description', $this->description, PDO::PARAM_STR);
+        // $query->execute();
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
+    public function delete(){
+        $query = DB::connection()->prepare('DELETE FROM Gift WHERE id = :id');
+        $query->execute(array('id' => $this->id));
     }
 
 }

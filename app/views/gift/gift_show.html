@@ -1,4 +1,9 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %} {% block content %}
+  {% if message %}
+    <div class="alert alert-success">{{message}}</div>
+  {% endif %}
+
   <h1>{{gift.name}}</h1>
 
   <ul>
@@ -17,6 +22,7 @@
   <p>{{gift.description}}</p>
 
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/gifts/#{gift.id}/destroy")}}
+    <a href="{{base_path}}/gifts/{{gift.id}}/edit" class="btn btn-default">Muokkaa</a>
   </p>
 {% endblock %}
