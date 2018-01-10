@@ -25,7 +25,11 @@
   });
 
   $routes->get('/register', function() {
-    HelloWorldController::register();
+    UserController::register();
+  });
+
+  $routes->post('/register', function() {
+    UserController::handle_register();
   });
 
   $routes->get('/gifts', 'check_logged_in', function() {
