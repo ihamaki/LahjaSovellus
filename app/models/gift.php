@@ -59,7 +59,8 @@ class Gift extends BaseModel{
     }
 
     public static function findByPerson($person_id){
-        $query = DB::connection()->prepare('SELECT * FROM Gift WHERE person_id = :person_id');
+        $query = DB::connection()->prepare('SELECT * FROM Gift WHERE person_id = :person_id
+                                            ORDER BY name');
         $query->execute(array('person_id' => $person_id));
         $rows = $query->fetchAll();
 
