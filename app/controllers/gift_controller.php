@@ -54,6 +54,44 @@ class GiftController extends BaseController{
     }
   }
 
+  public static function edit($id){
+    $user = self::get_user_logged_in();
+    $gift = Gift::find($id);
+    $people = Person::all($user->id);
+    View::make('gift/gift_edit.html', array('gift' => $gift, 'people' => $people));
+  }
+
+  public static function update($id){
+    $params = $_POST;
+    if(array_key_exists('status', $params)){
+      $gift = new Gift(array(
+        'id' => $id,
+        'person_id' => $params['person'],
+        'name' => $params['name'],
+        'status' => $params['status'],
+        'description' => $params['description']
+      ));
+    }else{
+      $gift = new Gift(array(
+        'id' => $id,
+        'person_id' => $params['person'],
+        'name' => $params['name'],
+        'status' => 'false',
+        'description' => $params['description']
+      ));
+    }
+    $errors = $gift->errors();
+
+    if(count($errors) == 0){
+      $gift->update();
+      Redirect::to('/gifts/' . $gift->id, array('message' => 'Lahjan muokkaus onnistui!'));
+    }else{
+      $user = self::get_user_logged_in();
+      $people = Person::all($user->id);
+      View::make('gift/gift_edit.html', array('errors' => $errors, 'gift' => $gift, 'people' => $people));
+    }
+  }
+
   public static function destroy($id){
     $gift = Gift::find($id);
     $gift->delete();

@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-  <h1>Lisää uusi lahja</h1>
+  <h1>Muokkaa lahjaa {{gift.name}}</h1>
 
   {% if errors %}
     <div class="alert alert-danger">
@@ -11,17 +11,17 @@
     </div>
   {% endif %}
 
-  <form method="post" action="{{base_path}}/gifts/new">
+  <form method="post" action="{{base_path}}/gifts/{{gift.id}}/edit">
     <div class="form-group">
       <label>Nimi</label>
-      <input name="name" class="form-control" value="{{attributes.name}}" type="text">
+      <input name="name" class="form-control" value="{{gift.name}}" type="text">
     </div>
 
     <div class="form-group">
       <label>Saaja</label>
       <select name="person" class="form-control">
         {% for person in people %}
-          {% if attributes.person_id == person.id %}
+          {% if gift.person_id == person.id %}
             <option value="{{person.id}}" selected>{{person.name}}</option>
           {% else %}
             <option value="{{person.id}}">{{person.name}}</option>
@@ -37,11 +37,11 @@
 
     <div class="form-group">
       <label>Kuvaus</label>
-      <textarea name="description" class="form-control">{{attributes.description}}</textarea>
+      <textarea name="description" class="form-control">{{gift.description}}</textarea>
     </div>
 
     <div class="form-check">
-      {% if attributes.status == 'true' %}
+      {% if gift.status == 'true' %}
         <input name="status" class="form-check-input" value="true" type="checkbox" checked>
       {% else %}
         <input name="status" class="form-check-input" value="true" type="checkbox">
@@ -53,7 +53,7 @@
       
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Tallenna</button>
-      <a href="{{base_path}}/gifts" type="button" class="btn btn-danger">Peruuta</a>
+      <a href="{{base_path}}/gifts/{{gift.id}}" type="button" class="btn btn-danger">Peruuta</a>
     </div>
   </form>
 {% endblock %}

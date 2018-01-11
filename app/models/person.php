@@ -63,12 +63,12 @@ class Person extends BaseModel{
         $this->id = $row['id'];
     }
 
-    public function update($id){
+    public function update(){
         $query = DB::connection()->prepare('UPDATE Person 
                                             SET name = :name, birthday = :birthday, description = :description 
                                             WHERE id = :id');
         $query->execute(array(
-            'id' => $id,
+            'id' => $this->id,
             'name' => $this->name, 
             'birthday' => $this->birthday, 
             'description' => $this->description));   

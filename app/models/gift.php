@@ -106,6 +106,19 @@ class Gift extends BaseModel{
         $this->id = $row['id'];
     }
 
+    public function update(){
+        $query = DB::connection()->prepare('UPDATE Gift
+                                            SET person_id = :person_id, name = :name, status = :status, description = :description
+                                            WHERE id = :id');
+        $query->execute(array(
+            'id' => $this->id,
+            'person_id' => $this->person_id,
+            'name' => $this->name,
+            'status' => $this->status,
+            'description' => $this->description
+        ));
+    }
+
     public function delete(){
         $query = DB::connection()->prepare('DELETE FROM Gift WHERE id = :id');
         $query->execute(array('id' => $this->id));

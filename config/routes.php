@@ -1,5 +1,7 @@
 <?php
 
+  ## General
+
   function check_logged_in(){
     BaseController::check_logged_in();
   }
@@ -32,6 +34,8 @@
     UserController::handle_register();
   });
 
+  ## Gifts
+
   $routes->get('/gifts', 'check_logged_in', function() {
     GiftController::list();
   });
@@ -44,10 +48,6 @@
     GiftController::create();
   });
 
-  $routes->get('/testgifts', function() {
-    HelloWorldController::gift_list();
-  });
-
   $routes->get('/gifts/:id', 'check_logged_in', function($id) {
     GiftController::show($id);
   });
@@ -56,13 +56,15 @@
     GiftController::destroy($id);
   });
 
-  $routes->get('/gifts/1/edit', function() {
-    HelloWorldController::gift_edit();
+  $routes->get('/gifts/:id/edit', 'check_logged_in', function($id) {
+    GiftController::edit($id);
   });
 
-  $routes->get('/gifts/person/1', function() {
-    HelloWorldController::person_gifts();
+  $routes->post('/gifts/:id/edit', 'check_logged_in', function($id) {
+    GiftController::update($id);
   });
+
+  ## People
 
   $routes->get('/people', 'check_logged_in', function() {
     PersonController::list();
@@ -91,6 +93,8 @@
   $routes->post('/people/:id/destroy', 'check_logged_in', function($id) {
     PersonController::destroy($id);
   });
+
+  ## Tags
 
   $routes->get('/tags/1/edit', function() {
     HelloWorldController::tag_edit();

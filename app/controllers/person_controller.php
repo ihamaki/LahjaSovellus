@@ -56,7 +56,7 @@ class PersonController extends BaseController{
     $errors = $person->errors();
 
     if(count($errors) == 0){
-      $person->update($id);
+      $person->update();
       Redirect::to('/people/' . $person->id, array('message' => 'Henkilön muokkaus onnistui!'));
     }else{
       View::make('person/person_edit.html', array('errors' => $errors, 'person' => $person));
