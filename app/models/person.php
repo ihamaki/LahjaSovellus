@@ -103,6 +103,9 @@ class Person extends BaseModel{
         if(!$this->validate_not_empty($this->birthday)){
             $errors[] = 'Henkilön syntymäpäivä ei saa olla tyhjä';
         }
+        if(!$this->validate_date($this->birthday) || $this->birthday > date('Y-m-d')){
+            $errors[] = 'Syntymäpäivän tulee olla oikea päivämäärä';
+        }
         return $errors;
     }
 
@@ -113,5 +116,4 @@ class Person extends BaseModel{
         }
         return $errors;
     }
-
 }

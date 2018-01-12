@@ -16,6 +16,7 @@ class GiftController extends BaseController{
   public static function new(){
     $user = self::get_user_logged_in();
     $people = Person::all($user->id);
+    self::check_if_people($people);
     View::make('gift/gift_new.html', array('people' => $people));
   }
 
@@ -96,5 +97,11 @@ class GiftController extends BaseController{
     $gift = Gift::find($id);
     $gift->delete();
     Redirect::to('/gifts', array('message' => 'Lahjan poisto onnistui!'));
+  }
+
+  public static function check_if_people($people){
+    if(!$people){
+      Redirect::to('/people', array('error' => 'Ennen uuden lahjan luomista järjestelmään pitää lisätä lahjan saaja'));
+    }
   }
 }

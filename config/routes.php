@@ -96,6 +96,4 @@
 
   ## Tags
 
-  $routes->get('/tags/1/edit', function() {
-    HelloWorldController::tag_edit();
-  });
+  

@@ -48,4 +48,12 @@
       return true;
     }
 
+    public function validate_date($date){
+      $format = 'Y-m-d';
+      $d = DateTime::createFromFormat($format, $date);
+      if($d && $d->format($format) == $date){
+        return true;
+      }
+      return false;
+    }
   }
