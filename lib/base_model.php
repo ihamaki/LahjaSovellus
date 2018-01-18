@@ -28,6 +28,7 @@
     }
 
     public function validate_not_empty($string){
+      $string = trim($string);
       if($string == '' || $string == null){
         return false;
       }

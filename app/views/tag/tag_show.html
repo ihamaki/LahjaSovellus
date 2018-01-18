@@ -1,0 +1,13 @@
+{% import "macros/forms.html" as forms %}
+{% extends "base.html" %} {% block content %}
+  {% if message %}
+    <div class="alert alert-success">{{message}}</div>
+  {% endif %}
+
+  <h1>{{tag.name}}</h1>
+
+  <p>
+    {{forms.destroy_button("#{base_path}/tags/#{tag.id}/destroy")}}
+    <a href="{{base_path}}/tags/{{tag.id}}/edit" class="btn btn-default">Muokkaa</a>
+  </p>
+{% endblock %}

@@ -56,6 +56,9 @@ class User extends BaseModel{
 
     public function validate_username(){
         $errors = array();
+        if (!$this->validate_not_empty($this->username)){
+            $errors[] = 'Käyttäjänimi ei saa olla tyhjä';
+        }
         if(!$this->validate_min_length($this->username, 5) || !$this->validate_max_length($this->username, 30)){
             $errors[] = 'Käyttäjän nimen tulee olla 5-30 merkkiä pitkä';
         }
