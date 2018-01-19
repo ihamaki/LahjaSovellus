@@ -11,7 +11,8 @@ class TagController extends BaseController{
 	public static function show($id){
 		$tag = Tag::find($id);
 		self::check_if_authorized($tag->account_id);
-		View::make('tag/tag_show.html', array('tag' => $tag));
+		$gifts = GiftTag::find_by_tag($tag->id);
+		View::make('tag/tag_show.html', array('tag' => $tag, 'gifts' => $gifts));
 	}
 
 	public static function new(){
@@ -64,9 +65,13 @@ class TagController extends BaseController{
 	}
 
 	public static function destroy($id){
-			$tag = Tag::find($id);
-			self::check_if_authorized($tag->account_id);
+		$tag = Tag::find($id);
+		self::check_if_authorized($tag->account_id);
+		if($tag->can_delete()){
 			$tag->delete();
 			Redirect::to('/tags', array('message' => 'Tagin poisto onnistui!'));
+		}else{
+      Redirect::to('/tags/' . $tag->id, array('error' => 'Tagia ei voida poistaa, sillä tagiin liittyy lahjoja', 'tag' => $tag));
+    }
 	}
 }

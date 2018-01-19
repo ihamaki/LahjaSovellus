@@ -8,7 +8,10 @@
 
   <ul>
     <li><strong>Saaja:</strong> <a href="{{base_path}}/people/{{gift.person_id}}">{{gift.person_name}}</a></li>
-    <li><strong>Tagit:</strong> </li>
+    <li><strong>Tagit:</strong> 
+      {% for tag in gift.tags %}
+        <span><a href="{{base_path}}/tags/{{tag.id}}">{{tag.name}}</a> </span>
+      {% endfor %}</li>
     <li><strong>Status:</strong> 
       {% if gift.status %}
           <label class="label label-success">annettu

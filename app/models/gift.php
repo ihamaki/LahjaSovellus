@@ -2,7 +2,7 @@
 
 class Gift extends BaseModel{
 
-    public $id, $account_id, $person_id, $person_name, $name, $status, $description, $added;
+    public $id, $account_id, $person_id, $person_name, $name, $status, $description, $added, $tags;
 
     public function __construct($attributes){
         parent::__construct($attributes);
@@ -41,6 +41,7 @@ class Gift extends BaseModel{
 
         if($row){
             $person_name = Person::find($row['person_id'])->name;
+            $tags = GiftTag::find_by_gift($row['id']);
             $gift = new Gift(array(
                 'id' => $row['id'],
                 'account_id' => $row['account_id'],
@@ -49,7 +50,8 @@ class Gift extends BaseModel{
                 'name' => $row['name'],
                 'status' => $row['status'],
                 'description' => $row['description'],
-                'added' => $row['added']
+                'added' => $row['added'],
+                'tags' => $tags
             ));
 
             return $gift;

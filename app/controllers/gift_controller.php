@@ -18,7 +18,8 @@ class GiftController extends BaseController{
     $user = self::get_user_logged_in();
     $people = Person::all($user->id);
     self::check_if_people($people);
-    View::make('gift/gift_new.html', array('people' => $people));
+    $tags = Tag::all($user->id);
+    View::make('gift/gift_new.html', array('people' => $people, 'tags' => $tags));
   }
 
   public static function create(){
@@ -50,6 +51,12 @@ class GiftController extends BaseController{
 
     if(count($errors) == 0){
       $gift->save();
+      if(array_key_exists('tags', $params)){
+        foreach($params['tags'] as $tag_id){
+          $gift_tag = new GiftTag(array('gift_id' => $gift->id, 'tag_id' => $tag_id));
+          $gift_tag->save();
+        }
+      }
       Redirect::to('/gifts/' . $gift->id, array('message' => 'Lahjan lisäys onnistui!'));
     }else{
       $people = Person::all($user->id);
@@ -62,7 +69,8 @@ class GiftController extends BaseController{
     self::check_if_authorized($gift->account_id);
     $user = self::get_user_logged_in();
     $people = Person::all($user->id);
-    View::make('gift/gift_edit.html', array('gift' => $gift, 'people' => $people));
+    $tags = Tag::all($user->id);
+    View::make('gift/gift_edit.html', array('gift' => $gift, 'people' => $people, 'tags' => $tags));
   }
 
   public static function update($id){
@@ -92,6 +100,13 @@ class GiftController extends BaseController{
 
     if(count($errors) == 0){
       $gift->update();
+      GiftTag::delete_by_gift($gift->id);
+      if(array_key_exists('tags', $params)){
+        foreach($params['tags'] as $tag_id){
+          $gift_tag = new GiftTag(array('gift_id' => $gift->id, 'tag_id' => $tag_id));
+          $gift_tag->save();
+        }
+      }
       Redirect::to('/gifts/' . $gift->id, array('message' => 'Lahjan muokkaus onnistui!'));
     }else{
       $user = self::get_user_logged_in();

@@ -68,6 +68,14 @@ class Tag extends BaseModel{
         $query->execute(array('id' => $this->id));
     }
 
+    public function can_delete(){
+        $tag_gifts = GiftTag::find_by_tag($this->id);
+        if(count($tag_gifts)>0){
+            return false;
+        }
+        return true;
+    }
+
     public function validate_name(){
         $errors = array();
         if(!$this->validate_not_empty($this->name)){
