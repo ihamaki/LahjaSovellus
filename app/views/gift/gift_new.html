@@ -41,10 +41,10 @@
     </div>
 
     <div class="form-check">
-      {% if attributes.status == 'true' %}
-        <input name="status" class="form-check-input" value="true" type="checkbox" checked>
+      {% if attributes.status == 1 %}
+        <input name="status" class="form-check-input" type="checkbox" checked>
       {% else %}
-        <input name="status" class="form-check-input" value="true" type="checkbox">
+        <input name="status" class="form-check-input" type="checkbox">
       {% endif %}
       <label class="form-check-label">
         Annettu

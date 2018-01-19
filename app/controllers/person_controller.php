@@ -10,6 +10,7 @@ class PersonController extends BaseController{
 
   public static function show($id){
     $person = Person::find($id);
+    self::check_if_authorized($person->account_id);
     $gifts = Gift::findByPerson($id);
     View::make('person/person_show.html', array('person' => $person, 'gifts' => $gifts));
   }
@@ -27,7 +28,6 @@ class PersonController extends BaseController{
       'birthday' => $params['birthday'],
       'description' => $params['description']
     );
-
     $person = new Person($attributes);
     $errors = $person->errors();
 
@@ -41,10 +41,14 @@ class PersonController extends BaseController{
 
   public static function edit($id){
     $person = Person::find($id);
+    self::check_if_authorized($person->account_id);
     View::make('person/person_edit.html', array('person' => $person));
   }
 
   public static function update($id){
+    $person = Person::find($id);
+    self::check_if_authorized($person->account_id);
+
     $params = $_POST;
     $person = new Person(array(
       'id' => $id,
@@ -52,7 +56,6 @@ class PersonController extends BaseController{
       'birthday' => $params['birthday'],
       'description' => $params['description']
     ));
-
     $errors = $person->errors();
 
     if(count($errors) == 0){
@@ -65,6 +68,7 @@ class PersonController extends BaseController{
 
   public static function destroy($id){
     $person = Person::find($id);
+    self::check_if_authorized($person->account_id);
     if($person->can_delete()){
       $person->delete();
       Redirect::to('/people', array('message' => 'Henkilön poisto onnistui!'));

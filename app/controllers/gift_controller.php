@@ -10,6 +10,7 @@ class GiftController extends BaseController{
 
   public static function show($id){
     $gift = Gift::find($id);
+    self::check_if_authorized($gift->account_id);
     View::make('gift/gift_show.html', array('gift' => $gift));
   }
 
@@ -23,12 +24,13 @@ class GiftController extends BaseController{
   public static function create(){
     $user = self::get_user_logged_in();
     $params = $_POST;
+
     if(array_key_exists('status', $params)){
       $attributes = array(
         'account_id' => $user->id,
         'person_id' => $params['person'],
         'name' => $params['name'],
-        'status' => $params['status'],
+        'status' => 1,
         'description' => $params['description'],
         'added' => date("Y-m-d")
       );
@@ -37,7 +39,7 @@ class GiftController extends BaseController{
         'account_id' => $user->id,
         'person_id' => $params['person'],
         'name' => $params['name'],
-        'status' => 'false',
+        'status' => 0,
         'description' => $params['description'],
         'added' => date("Y-m-d")
       );
@@ -56,20 +58,24 @@ class GiftController extends BaseController{
   }
 
   public static function edit($id){
-    $user = self::get_user_logged_in();
     $gift = Gift::find($id);
+    self::check_if_authorized($gift->account_id);
+    $user = self::get_user_logged_in();
     $people = Person::all($user->id);
     View::make('gift/gift_edit.html', array('gift' => $gift, 'people' => $people));
   }
 
   public static function update($id){
+    $gift = Gift::find($id);
+    self::check_if_authorized($gift->account_id);
     $params = $_POST;
+
     if(array_key_exists('status', $params)){
       $gift = new Gift(array(
         'id' => $id,
         'person_id' => $params['person'],
         'name' => $params['name'],
-        'status' => $params['status'],
+        'status' => 1,
         'description' => $params['description']
       ));
     }else{
@@ -77,10 +83,11 @@ class GiftController extends BaseController{
         'id' => $id,
         'person_id' => $params['person'],
         'name' => $params['name'],
-        'status' => 'false',
+        'status' => 0,
         'description' => $params['description']
       ));
     }
+    
     $errors = $gift->errors();
 
     if(count($errors) == 0){
@@ -95,6 +102,7 @@ class GiftController extends BaseController{
 
   public static function destroy($id){
     $gift = Gift::find($id);
+    self::check_if_authorized($gift->account_id);
     $gift->delete();
     Redirect::to('/gifts', array('message' => 'Lahjan poisto onnistui!'));
   }

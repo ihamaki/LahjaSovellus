@@ -17,7 +17,7 @@ CREATE TABLE Gift(
   account_id INTEGER REFERENCES Account(id),
   person_id INTEGER REFERENCES Person(id),
   name varchar(100) NOT NULL,
-  status boolean DEFAULT FALSE,
+  status INTEGER DEFAULT 0,
   description varchar(500),
   added DATE
 );

@@ -96,13 +96,6 @@ class Gift extends BaseModel{
             'added' => $this->added
         ));
 
-        // $query->bindValue(':account_id', $this->account_id, PDO::PARAM_INT);
-        // $query->bindValue(':person_id', $this->person_id, PDO::PARAM_INT);
-        // $query->bindValue(':name', $this->name, PDO::PARAM_STR);
-        // $query->bindValue(':status', $this->status, PDO::PARAM_BOOL);
-        // $query->bindValue(':description', $this->description, PDO::PARAM_STR);
-        // $query->execute();
-
         $row = $query->fetch();
         $this->id = $row['id'];
     }

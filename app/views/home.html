@@ -1,17 +1,32 @@
 {% extends "base.html" %} {% block content %}
 
+  {% if error %}
+    <div class="alert alert-danger">{{error}}</div>
+  {% endif %}
+
   {% if message %}
     <div class="alert alert-success">{{message}}</div>
   {% endif %}
 
-  <div class="page-header">
-    <h1>Tervetuloa LahjaSovellukseen! Rekisteröidy ja kirjaudu sisään käyttääksesi sovellusta.</h1>
-  </div>
+  {% if user_logged_in %}
+    <div class="page-header">
+      <h1>Tervetuloa LahjaSovellukseen!</h1>
+    </div>
+    <p>
+      Voit lisätä sovellukseen uusia henkilöitä lahjojen saajaksi kohdassa <a href="{{base_path}}/people">saajat</a>. 
+      Uusia lahjoja pääset lisäämään ja muokkaamaan kohdassa <a href="{{base_path}}/gifts">lahjat</a>.
+      Tagien hallinta löytyy kohdasta <a href="{{base_path}}/tags">tagit</a>.
+    </p>
+  {% else %}
+    <div class="page-header">
+      <h1>Tervetuloa LahjaSovellukseen! Rekisteröidy ja kirjaudu sisään käyttääksesi sovellusta.</h1>
+    </div>
 
-  <p>
-    <a href="{{base_path}}/login" class="btn btn-primary btn-lg">Kirjaudu sisään <span class="glyphicon glyphicon-chevron-right"></span></a>
-  </p>
-  <p>
-    <a href="{{base_path}}/register" class="btn btn-primary btn-lg">Uusi käyttäjä <span class="glyphicon glyphicon-chevron-right"></span></a>
-  </p>
+    <p>
+      <a href="{{base_path}}/login" class="btn btn-primary btn-lg">Kirjaudu sisään <span class="glyphicon glyphicon-chevron-right"></span></a>
+    </p>
+    <p>
+      <a href="{{base_path}}/register" class="btn btn-primary btn-lg">Uusi käyttäjä <span class="glyphicon glyphicon-chevron-right"></span></a>
+    </p>
+  {% endif %}
 {% endblock %}

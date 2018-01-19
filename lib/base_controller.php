@@ -16,4 +16,11 @@ class BaseController{
     }
   }
 
+  public static function check_if_authorized($id){
+    $user = self::get_user_logged_in();
+    if($user->id != $id){
+      Redirect::to('/', array('error' => 'Sinulla ei ole oikeuksia tälle sivulle'));
+    }
+  }
+
 }

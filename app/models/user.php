@@ -14,7 +14,6 @@ class User extends BaseModel{
                                             WHERE username = :username AND password = :password LIMIT 1');
         $query->execute(array('username' => $username, 'password' => $password));
         $row = $query->fetch();
-        
         if($row){
             $user = new User(array(
                 'id' => $row['id'],
@@ -30,7 +29,6 @@ class User extends BaseModel{
         $query = DB::connection()->prepare('SELECT * FROM Account WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-
         if($row){
             $user = new User(array(
                 'id' => $row['id'],
@@ -56,13 +54,26 @@ class User extends BaseModel{
 
     public function validate_username(){
         $errors = array();
-        if (!$this->validate_not_empty($this->username)){
+        if(!$this->validate_username_not_used($this->username)){
+            $errors[] = 'Käyttäjänimi on jo käytössä';
+        }
+        if(!$this->validate_not_empty($this->username)){
             $errors[] = 'Käyttäjänimi ei saa olla tyhjä';
         }
         if(!$this->validate_min_length($this->username, 5) || !$this->validate_max_length($this->username, 30)){
             $errors[] = 'Käyttäjän nimen tulee olla 5-30 merkkiä pitkä';
         }
         return $errors;
+    }
+
+    public function validate_username_not_used($username){
+        $query = DB::connection()->prepare('SELECT * FROM Account WHERE username = :username LIMIT 1');
+        $query->execute(array('username' => $username));
+        $row = $query->fetch();
+        if($row){
+            return false;
+        }
+        return true;
     }
 
     public function validate_password(){
